@@ -1,0 +1,451 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0d0b10;
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-hover: rgba(255, 255, 255, 0.07);
+    --border: rgba(212, 160, 145, 0.18);
+    --border-hover: rgba(212, 160, 145, 0.45);
+    --rose-gold: #d4a091;
+    --blush: #f0c4b8;
+    --cream: #f5ede8;
+    --muted: rgba(245, 237, 232, 0.45);
+    --tag-bg: rgba(212, 160, 145, 0.12);
+    --tag-color: #d4a091;
+}
+
+body {
+    background: var(--bg);
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px 80px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Ambient background blobs */
+body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(180, 90, 110, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(130, 80, 160, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Decorative botanical SVG top */
+.deco-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+}
+
+.container {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Avatar */
+.avatar-wrap {
+    position: relative;
+    margin-bottom: 24px;
+    animation: fadeDown 0.7s ease both;
+}
+
+.avatar-ring {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    border: 1.5px solid var(--rose-gold);
+    padding: 3px;
+    box-shadow: 0 0 32px rgba(212, 160, 145, 0.15);
+}
+
+.avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3d2030, #2a1828);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--blush);
+    letter-spacing: 2px;
+}
+
+/* Name & title */
+.name-block {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeDown 0.7s 0.1s ease both;
+}
+
+.name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--cream);
+    line-height: 1.1;
+}
+
+.handle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--rose-gold);
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Decorative divider */
+.divider {
+    width: 80px;
+    height: 1px;
+    margin: 0 auto 32px;
+    background: linear-gradient(90deg, transparent, var(--rose-gold), transparent);
+    animation: fadeIn 0.6s 0.3s both;
+}
+
+/* Grid */
+.grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.grid .full {
+    grid-column: 1 / -1;
+}
+
+/* Card */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212, 160, 145, 0.04), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: inherit;
+}
+
+.card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Icon bubble */
+.icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.icon-x {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.icon-li {
+    background: rgba(10, 102, 194, 0.15);
+}
+
+.icon-medium {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.icon-github {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.icon-google {
+    background: rgba(66, 133, 244, 0.12);
+}
+
+.icon-research {
+    background: rgba(180, 100, 160, 0.15);
+}
+
+.icon-odin {
+    background: rgba(80, 200, 160, 0.12);
+}
+
+.icon-mj {
+    background: rgba(160, 100, 220, 0.15);
+}
+
+.icon-yt {
+    background: rgba(255, 0, 0, 0.12);
+}
+
+/*.card-text {
+    display: flex;
+    min-width: 0;
+    justify-content: center;
+ }
+.card-title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+
+.tag {
+  font-size: 10px;
+  font-weight: 400;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  border-radius: 20px;
+  padding: 2px 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+} */
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    /* Aligne les éléments les uns sous les autres */
+    gap: 6px;
+    /* Espace régulier entre titre, tag et description */
+    min-width: 0;
+    flex: 1;
+    /* Pour que le texte prenne toute la place disponible */
+}
+
+.card-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1.4;
+    /* Meilleure lisibilité pour les titres longs */
+}
+
+.tag {
+    margin-left: 8px;
+    /* Force un espace à gauche du tag */
+    display: inline-block;
+    /* Permet au tag de respecter son propre padding */
+    width: fit-content;
+    /* Empêche le fond du tag de s'étaler sur toute la ligne */
+    font-size: 10px;
+    font-weight: 400;
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    border-radius: 20px;
+    padding: 2px 10px;
+    /* Un peu plus d'espace sur les côtés pour l'esthétique */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    /* Petit espace avant la description */
+
+}
+
+
+.card-sub {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 3px;
+    font-weight: 300;
+    font-family: 'DM Sans', monospace;
+    letter-spacing: 0.2px;
+}
+
+.ext-icon {
+    color: var(--muted);
+    opacity: 0.5;
+    font-size: 12px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Footer */
+footer {
+    margin-top: 48px;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: rgba(245, 237, 232, 0.2);
+    animation: fadeIn 1s 0.8s both;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+}
+
+/* Animations */
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Stagger cards */
+.card:nth-child(1) {
+    animation: fadeUp 0.5s 0.25s both;
+}
+
+.card:nth-child(2) {
+    animation: fadeUp 0.5s 0.30s both;
+}
+
+.card:nth-child(3) {
+    animation: fadeUp 0.5s 0.35s both;
+}
+
+.card:nth-child(4) {
+    animation: fadeUp 0.5s 0.40s both;
+}
+
+.card:nth-child(5) {
+    animation: fadeUp 0.5s 0.45s both;
+}
+
+.card:nth-child(6) {
+    animation: fadeUp 0.5s 0.50s both;
+}
+
+.card:nth-child(7) {
+    animation: fadeUp 0.5s 0.55s both;
+}
+
+.card:nth-child(8) {
+    animation: fadeUp 0.5s 0.60s both;
+}
+
+.card:nth-child(9) {
+    animation: fadeUp 0.5s 0.65s both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floral corner SVG */
+.floral-corner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 220px;
+    height: 220px;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floral-corner-r {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    height: 220px;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(180deg);
+}
+
+@media (max-width: 400px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid .full {
+        grid-column: 1;
+    }
+}
